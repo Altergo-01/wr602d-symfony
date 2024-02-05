@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -40,6 +42,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updated_at = null;
+
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Subscription $subscription = null;
+
+    #[ORM\OneToMany(targetEntity: Pdf::class, mappedBy: 'user_id', orphanRemoval: true)]
+    private Collection $pdf;
+
+    public function __construct()
+    {
+        $this->subscription_id = new ArrayCollection();
+        $this->pdf = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -116,6 +131,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->lastname;
     }
 
+
     public function setLastname(?string $lastname): static
     {
         $this->lastname = $lastname;
@@ -158,4 +174,49 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getSubscription(): ?Subscription
+    {
+        return $this->subscription;
+    }
+
+    public function setSubscription(?Subscription $subscription): static
+    {
+        $this->subscription = $subscription;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pdf>
+     */
+    public function getPdf(): Collection
+    {
+        return $this->pdf;
+    }
+
+    public function addPdf(Pdf $pdf): static
+    {
+        if (!$this->pdf->contains($pdf)) {
+            $this->pdf->add($pdf);
+            $pdf->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removePdf(Pdf $pdf): static
+    {
+        if ($this->pdf->removeElement($pdf)) {
+            // set the owning side to null (unless already changed)
+            if ($pdf->getUserId() === $this) {
+                $pdf->setUserId(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
 }
