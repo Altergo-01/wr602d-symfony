@@ -27,8 +27,14 @@ class Subscription
     #[ORM\Column]
     private ?float $price = null;
 
+    /**
+     * @var Collection<int, User>
+     */
     #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'subscription')]
     private Collection $users;
+
+
+
 
     public function __construct()
     {
@@ -117,4 +123,7 @@ class Subscription
 
         return $this;
     }
+
+
+
 }

@@ -22,6 +22,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
+    /**
+     * @var array<string>
+     */
+
     #[ORM\Column]
     private array $roles = [];
 
@@ -43,16 +47,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updated_at = null;
 
+
+    /**
+     * @var Collection<int, Pdf>
+     */
+    #[ORM\OneToMany(targetEntity: Pdf::class, mappedBy: 'user_id', orphanRemoval: true)]
+    private Collection $pdf;
+
     #[ORM\ManyToOne(inversedBy: 'users')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Subscription $subscription = null;
 
-    #[ORM\OneToMany(targetEntity: Pdf::class, mappedBy: 'user_id', orphanRemoval: true)]
-    private Collection $pdf;
-
     public function __construct()
     {
-        $this->subscription_id = new ArrayCollection();
         $this->pdf = new ArrayCollection();
     }
 
@@ -95,6 +102,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @param array<string> $roles
+     */
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
@@ -175,17 +185,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getSubscription(): ?Subscription
-    {
-        return $this->subscription;
-    }
 
-    public function setSubscription(?Subscription $subscription): static
-    {
-        $this->subscription = $subscription;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Pdf>
@@ -213,6 +213,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $pdf->setUserId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSubscription(): ?Subscription
+    {
+        return $this->subscription;
+    }
+
+    public function setSubscription(?Subscription $subscription): static
+    {
+        $this->subscription = $subscription;
 
         return $this;
     }
