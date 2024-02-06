@@ -50,5 +50,4 @@ class Pdf
 
         return $this;
     }
-
 }
