@@ -30,6 +30,6 @@ class UserTest extends TestCase
         $this->assertEquals($password, $user->getPassword());
         $this->assertEquals($firstname, $user->getFirstname());
         $this->assertEquals($lastname, $user->getLastname());
-        //[.. ETC ..]
+
     }
 }
