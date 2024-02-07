@@ -123,7 +123,4 @@ class Subscription
 
         return $this;
     }
-
-
-
 }
