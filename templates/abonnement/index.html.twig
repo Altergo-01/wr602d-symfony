@@ -12,9 +12,14 @@
 
         <p>Votre abonnement actuel : {{ user.getSubscription().getTitle() }} </p>
 
-        {% for subscription in subscriptions %}
-            <li>{{ subscription.name }} - {{ subscription.description }}</li>
-        {% endfor %}
+        <form method=" ">
+            {% for subscription in subscriptions %}
+                <div>
+                    <li class="">{{ subscription.title }} - {{ subscription.description }}</li>
+                </div>
+            {% endfor %}
+        </form>
+
     </div>
 </main>
 
