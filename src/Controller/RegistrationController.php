@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Subscription;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
@@ -41,6 +42,8 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $loadSub = $entityManager->getRepository(Subscription::class)->findOneBy(['title' => 'Free']);
+            $user->setSubscription($loadSub);
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -51,10 +54,11 @@ class RegistrationController extends AbstractController
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
+
             );
             // do anything else you need here, like send an email
-
-            return $this->redirectToRoute('app_accueil');
+            dump($user->getEmail());
+            //return $this->redirectToRoute('app_accueil');
         }
 
         return $this->render('registration/register.html.twig', [

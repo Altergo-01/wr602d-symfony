@@ -1,5 +1,7 @@
 <?php
 
+
+
 namespace App\Entity;
 
 use App\Repository\UserRepository;
@@ -14,6 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -166,26 +169,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->created_at;
     }
-
-    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    #[ORM\PrePersist]
+    public function setCreatedAt(): static
     {
-        $this->created_at = $created_at;
+        $this->created_at = new \DateTimeImmutable();
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updated_at): static
+    #[ORM\PrePersist]
+    public function setUpdatedAt(): static
     {
-        $this->updated_at = $updated_at;
+        $this->updated_at = new \DateTime();
 
         return $this;
     }
@@ -224,7 +229,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getSubscription(): ?Subscription
     {
-        return $this->subscription;
+        $valDef = "Free";
+        return $this->subscription = $valDef ;
     }
 
     public function setSubscription(?Subscription $subscription): static

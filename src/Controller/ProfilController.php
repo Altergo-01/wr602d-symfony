@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AbonnemenController extends AbstractController
+class ProfilController extends AbstractController
 {
-    #[Route('/abonnemen', name: 'app_abonnemen')]
+    #[Route('/profil', name: 'app_profil')]
     public function index(): Response
     {
-        return $this->render('abonnemen/index.html.twig', [
-            'controller_name' => 'AbonnemenController',
+        return $this->render('profil/index.html.twig', [
+            'controller_name' => 'ProfilController',
         ]);
     }
 }

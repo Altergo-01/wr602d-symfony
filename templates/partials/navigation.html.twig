@@ -1,0 +1,16 @@
+{% block navigation %}
+
+    <nav>
+        <div class="link-one">
+            <a href="{{ path('app_profil') }}" id="Profil">Pr</a>
+            <a href="{{ path('app_abonnement') }}" id="Abonnement">Ab</a>
+        </div>
+        <div class="link-two">
+            <a href="{{ path('app_pdf_generator') }}" id="Pdf">Pd</a>
+            {% if app.user %}
+                <a href="{{ path('app_logout') }}" id="Logout"><img src="{{ asset('img/logout.png') }}" alt=""></a>
+            {% endif %}
+        </div>
+    </nav>
+
+{% endblock %}
