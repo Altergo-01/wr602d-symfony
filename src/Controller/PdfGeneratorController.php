@@ -10,15 +10,14 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 use App\Service\PdfGeneratorService;
 use Symfony\Component\HttpFoundation\Request;
 
-
 class PdfGeneratorController extends AbstractController
 {
 
     private PdfGeneratorService $pdfGeneratorService;
 
-    public function __construct( PdfGeneratorService $pdfGeneratorService ) {
-       $this->pdfGeneratorService = $pdfGeneratorService;
-
+    public function __construct(PdfGeneratorService $pdfGeneratorService)
+    {
+        $this->pdfGeneratorService = $pdfGeneratorService;
     }
 
     #[Route('/pdf/generator', name: 'app_pdf_generator')]
@@ -36,7 +35,7 @@ class PdfGeneratorController extends AbstractController
             $url = $form->get('url')->getData();
             $pdfContent = $this->pdfGeneratorService->urlPdf($url);
 
-            return new Response($pdfContent, 200,['Content-type'=>'application/pdf']);
+            return new Response($pdfContent, 200, ['Content-type'=>'application/pdf']);
         }
 
 

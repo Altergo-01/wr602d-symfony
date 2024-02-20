@@ -6,19 +6,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Path;
+
 class PdfGeneratorService
 {
 
 
     private HttpClientInterface $httpClient;
 
-    public function __construct( HttpClientInterface $httpClient ) {
+    public function __construct(HttpClientInterface $httpClient)
+    {
 
         $this->httpClient = $httpClient;
-
     }
 
-    public function urlPdf( string $pdfUrl): ?string
+    public function urlPdf(string $pdfUrl): ?string
     {
         dump($pdfUrl);
         $filesystem = new Filesystem();
@@ -53,7 +54,5 @@ class PdfGeneratorService
         dump($pdfFileName, $response);
 
         return $response->getContent();
-
     }
-
 }

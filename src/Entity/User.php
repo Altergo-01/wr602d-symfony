@@ -236,11 +236,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setSubscription(?Subscription $subscription): static
     {
         $valDef = 1;
-        if($subscription != null ){
+        if ($subscription != null) {
             $this->subscription = $subscription;
-        }else{
+        } else {
             $this->subscription = $valDef;
-
         }
 
         return $this;

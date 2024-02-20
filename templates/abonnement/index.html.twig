@@ -12,7 +12,7 @@
 
         <p>Votre abonnement actuel : {{ user.getSubscription().getTitle() }} </p>
 
-        <form method=" ">
+        <form method="POST" action="{{ path('app_abonnement') }}">
             {% for subscription in subscriptions %}
                 <div>
                     <li class="">{{ subscription.title }} - {{ subscription.description }}</li>
