@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PdfGeneratorController!{% endblock %}
+{% block title %} Pdf Generator {% endblock %}
 
 {% block body %}
 <style>
@@ -9,9 +9,10 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="block-3">
+        {{ form_label(form.url, 'Votre Url à transformer : ') }}
+        {{ form_widget(form.url) }}
+    </div>
 
-    This friendly message is coming from:
-    <div> {{ form(form)}} </div>
 </div>
 {% endblock %}
