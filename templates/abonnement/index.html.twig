@@ -8,16 +8,27 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 <main>
-    <div class="block">
+    <div class="block-2">
 
         <p>Votre abonnement actuel : {{ user.getSubscription().getTitle() }} </p>
 
         <form method="POST" action="{{ path('app_abonnement') }}">
-            {% for subscription in subscriptions %}
-                <div>
-                    <li class="">{{ subscription.title }} - {{ subscription.description }}</li>
-                </div>
-            {% endfor %}
+            <div class="container-abo">
+                {% for subscription in subscriptions %}
+                    <div class="card-abo">
+                        <p class="">{{ subscription.title }}</p>
+                        <p>{{ subscription.price }} €</p>
+                        <br>
+                        <p>{{ subscription.description }}</p>
+                        <br>
+                        <input type="radio" id="{{ subscription.id }}" name="subscription" value="{{ subscription.id }}" class="radio" required>
+                        <br>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <button type="submit" class="subbutton">Je change d'abonnement</button>
+
         </form>
 
     </div>

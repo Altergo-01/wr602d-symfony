@@ -25,7 +25,12 @@ class PdfGeneratorController extends AbstractController
     {
 
         $form = $this->createFormBuilder()
-            ->add('url', TextType::class)
+            ->add('url', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control', // Ajoutez des classes CSS
+                    'placeholder' => 'https:// . . . ', // Ajoutez des attributs HTML
+                ],
+            ])
             ->getForm();
 
 

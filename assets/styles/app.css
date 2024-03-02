@@ -11,12 +11,15 @@ body {
 
 nav{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding: 0.7rem;
-    row-gap: 0.7rem;
+    column-gap: 0.7rem;
     border: white 2px solid;
     border-radius: 1.5rem;
-    width: min-content;
+    width: fit-content;
+    align-content: center;
+    justify-content: center;
+    margin: 1rem auto;
 }
 
 nav div{
@@ -32,7 +35,14 @@ nav div a {
     color: black;
     font-weight: bold;
     display: flex;
+    transition: all 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0);
+}
 
+nav div a:hover {
+    background-color: rgba(255, 255, 255, 0.29);
+    border : 1px solid white;
+    color: white;
 }
 
 nav div a img {
@@ -45,9 +55,74 @@ main{
 
 }
 
+form{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.subbutton{
+    padding: 0.5rem 1rem;
+    background-color: white;
+    color: black;
+    transition: 0.2s;
+    border: 1px white solid ;
+    border-radius: 0.75rem;
+    width: 40%;
+    margin: auto;
+}
+
+.subbutton:hover{
+    background-color: rgba(255, 255, 255, 0.22);
+    color: white;
+}
+
+.container-abo{
+    display: flex;
+    column-gap: 1rem;
+}
+
 .block{
     background-color: #444444;
     border: #626262 1px solid;
     border-radius: 1rem;
     width : 80% ;
+}
+
+.block-2{
+
+    border-radius: 1rem;
+    width : 80% ;
+
+}
+
+#form_url {
+    border-radius: 0.5rem;
+    border: none;
+    padding: 0.5rem;
+    width: 50%;
+}
+
+.block-3{
+    background-color: #444444;
+    border: #626262 1px solid;
+    border-radius: 1rem;
+    width : 80% ;
+    margin: auto;
+    padding: 2rem;
+}
+
+.card-abo{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    background-color: #444444;
+    border: #626262 1px solid;
+    padding:  2rem 1rem;
+    border-radius: 0.75rem;
+    width: 30%;
+}
+
+.radio{
+
 }
